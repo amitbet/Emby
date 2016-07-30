@@ -46,11 +46,6 @@
             DashboardPage.lastAppUpdateCheck = null;
             DashboardPage.lastPluginUpdateCheck = null;
 
-            Dashboard.getPluginSecurityInfo().then(function (pluginSecurityInfo) {
-
-                DashboardPage.renderSupporterIcon(page, pluginSecurityInfo);
-            });
-
             DashboardPage.reloadSystemInfo(page);
             DashboardPage.reloadNews(page);
             DashboardPage.sessionUpdateTimer = setInterval(DashboardPage.refreshSessionsLocally, 60000);
@@ -812,29 +807,6 @@
                 $('.externalUrl', page).html(remoteAccessHtml).show().trigger('create');
             } else {
                 $('.externalUrl', page).hide();
-            }
-        },
-
-        renderSupporterIcon: function (page, pluginSecurityInfo) {
-
-            var imgUrl, text;
-
-            var supporterIconContainer = page.querySelector('.supporterIconContainer');
-
-            if (!AppInfo.enableSupporterMembership) {
-                supporterIconContainer.classList.add('hide');
-            }
-            else if (pluginSecurityInfo.IsMBSupporter) {
-
-                supporterIconContainer.classList.remove('hide');
-
-                imgUrl = "css/images/supporter/supporterbadge.png";
-                text = Globalize.translate('MessageThankYouForSupporting');
-
-                supporterIconContainer.innerHTML = '<a class="imageLink supporterIcon" href="http://emby.media/premiere" target="_blank" title="' + text + '"><img src="' + imgUrl + '" style="height:32px;vertical-align: middle; margin-right: .5em;" /></a><span style="position:relative;top:2px;text-decoration:none;">' + text + '</span>';
-            } else {
-
-                supporterIconContainer.classList.add('hide');
             }
         },
 
